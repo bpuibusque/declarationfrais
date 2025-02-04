@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Accueil Professeur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #4A90E2, #50E3C2);
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background: #007BFF;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 10px;
+        }
+        a:hover {
+            background: #0056b3;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            color: black;
+        }
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #007BFF;
+            color: white;
+        }
+        .status {
+            font-weight: bold;
+        }
+        .status.EN_ATTENTE {
+            color: orange;
+        }
+        .status.VALIDE {
+            color: green;
+        }
+        .status.INVALIDE {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bonjour, Mr. <span th:text="${username}"></span></h1>
+    <div class="container">
+        <p>Gérez vos déclarations de frais ici :</p>
+        <a href="/professeur/declaration/new">Créer une nouvelle déclaration</a>
+        <a href="/logout">Se déconnecter</a>
+
+        <h2>Mes déclarations</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Formation</th>
+                <th>Lieu</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+            <tr th:each="declaration : ${declarations}">
+                <td th:text="${declaration.date}"></td>
+                <td th:text="${declaration.formation}"></td>
+                <td th:text="${declaration.lieu}"></td>
+                <td th:text="${declaration.statut}" th:class="'status ' + ${declaration.statut}"></td>
+                <td>
+                    <a th:href="@{/professeur/declaration/{id}(id=${declaration.id})}">Voir</a>
+                    <a th:if="${declaration.statut == 'EN_ATTENTE'}" th:href="@{/professeur/declaration/edit/{id}(id=${declaration.id})}">Modifier</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

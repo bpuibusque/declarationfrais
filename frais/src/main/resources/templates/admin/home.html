@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Accueil Administrateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #E94E77, #D68189);
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background: #ff5722;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 10px;
+        }
+        a:hover {
+            background: #e64a19;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bienvenue, Administrateur</h1>
+    <div class="container">
+        <p>Vous pouvez gérer les déclarations de frais ici.</p>
+        <a href="/admin/declarations">Gérer les déclarations</a>
+        <a href="/admin/users">Gérer les utilisateurs</a>
+        <a href="/logout">Se déconnecter</a>
+    </div>
+</body>
+</html>

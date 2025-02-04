@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Connexion - NoteDeFrais Limayrac</title>
+    <style>
+        body {
+            background: linear-gradient(90deg, #000000, #ffffff, #000000, #ffffff);
+            background-size: 400% 400%;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #FFFFFF;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+
+
+        h1 {
+            font-size: 3em;
+            color: #FFFFFF;
+            text-shadow: 3px 3px #000000;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+        }
+
+        a, button {
+            font-size: 1.5em;
+            color: #FFFFFF;
+            text-decoration: none;
+            background: #000000;
+            padding: 10px 20px;
+            margin: 10px;
+            display: inline-block;
+            border-radius: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, background 0.3s;
+            cursor: pointer;
+        }
+
+        a:hover, button:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: #898989;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        input {
+            font-size: 1.2em;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            border: none;
+            text-align: center;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            color: #FFFFFF;
+            font-size: 1.2em;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Connexion à NoteDeFrais Limayrac</h1>
+    <div class="logo">
+        <img src="/images/limayrac.png" alt="Logo Limayrac" style="width: 100%; height: 100%;">
+    </div>
+    <form th:action="@{/login}" method="post" class="form-container">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Se connecter</button>
+    </form>
+    <p>Pas encore inscrit ? <a href="/register">Créez un compte !</a></p>
+
+    <footer>
+        © 2025 Limayrac - "Les frais, c'est notre dada !"
+    </footer>
+</body>
+</html>

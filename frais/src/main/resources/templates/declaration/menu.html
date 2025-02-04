@@ -1,0 +1,13 @@
+<div th:fragment="menu(currentStep)">
+    <nav>
+        <ul>
+            <li th:classappend="${currentStep == 'preparer'} ? 'active'"><a href="/professeur/declaration/preparer">Préparer</a></li>
+            <li th:classappend="${currentStep == 'details'} ? 'active'"><a href="/professeur/declaration/details">Détails</a></li>
+            <li th:classappend="${currentStep == 'transport'} ? 'active'"><a href="/professeur/declaration/transport">Transport</a></li>
+            <li th:classappend="${currentStep == 'hebergement'} ? 'active'"><a href="/professeur/declaration/hebergement">Hébergement</a></li>
+            <li th:classappend="${currentStep == 'restauration'} ? 'active'"><a href="/professeur/declaration/restauration">Restauration</a></li>
+            <li th:classappend="${currentStep == 'coordonnees'} ? 'active'"><a href="/professeur/declaration/coordonnees">Coordonnées</a></li>
+            <li th:classappend="${currentStep == 'recapitulatif'} ? 'active'"><a href="/professeur/declaration/recapitulatif">Récapitulatif</a></li>
+        </ul>
+    </nav>
+</div>

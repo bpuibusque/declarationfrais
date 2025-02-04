@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+      http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+    <on-start>
+        <evaluate expression="declarationFraisService.initDeclaration()" result="flowScope.declaration"/>
+    </on-start>
+
+    <!-- Étape 1 : Préparer la déclaration -->
+    <view-state id="preparer" view="declaration/preparer">
+        <transition on="next" to="details"/>
+    </view-state>
+
+    <!-- Étape 2 : Détails de la formation -->
+    <view-state id="details" view="declaration/details">
+        <transition on="next" to="transport"/>
+        <transition on="back" to="preparer"/>
+    </view-state>
+
+    <!-- Étape 3 : Frais de transport -->
+    <view-state id="transport" view="declaration/transport">
+        <transition on="next" to="hebergement"/>
+        <transition on="back" to="details"/>
+    </view-state>
+
+    <!-- Étape 4 : Frais d'hébergement -->
+    <view-state id="hebergement" view="declaration/hebergement">
+        <transition on="next" to="restauration"/>
+        <transition on="back" to="transport"/>
+    </view-state>
+
+    <!-- Étape 5 : Frais de restauration -->
+    <view-state id="restauration" view="declaration/restauration">
+        <transition on="next" to="coordonnees"/>
+        <transition on="back" to="hebergement"/>
+    </view-state>
+
+    <!-- Étape 6 : Coordonnées bancaires -->
+    <view-state id="coordonnees" view="declaration/coordonnees">
+        <transition on="next" to="recapitulatif"/>
+        <transition on="back" to="restauration"/>
+    </view-state>
+
+    <!-- Étape 7 : Récapitulatif avant soumission -->
+    <view-state id="recapitulatif" view="declaration/recapitulatif">
+        <transition on="submit" to="finaliser"/>
+        <transition on="back" to="coordonnees"/>
+    </view-state>
+
+    <!-- Étape 8 : Dépôt de la déclaration -->
+    <action-state id="finaliser">
+        <evaluate expression="declarationFraisService.soumettreDeclaration(flowScope.declaration)"/>
+        <transition to="confirmation"/>
+    </action-state>
+
+    <!-- Étape 9 : Confirmation après transmission -->
+    <view-state id="confirmation" view="declaration/confirmation"/>
+</flow>
