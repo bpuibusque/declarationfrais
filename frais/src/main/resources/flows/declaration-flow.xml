@@ -2,14 +2,16 @@
 <flow xmlns="http://www.springframework.org/schema/webflow"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
-      http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
+    <!-- Au démarrage du flow, on initialise la déclaration (et ses éventuels sous-objets) -->
     <on-start>
         <evaluate expression="declarationFraisService.initDeclaration()" result="flowScope.declaration"/>
     </on-start>
 
     <!-- Étape 1 : Préparer la déclaration -->
     <view-state id="preparer" view="declaration/preparer">
+        <!-- Quand l'utilisateur clique sur le bouton (name="_eventId_next"), on passe à l’étape suivante -->
         <transition on="next" to="details"/>
     </view-state>
 
@@ -45,12 +47,14 @@
 
     <!-- Étape 7 : Récapitulatif avant soumission -->
     <view-state id="recapitulatif" view="declaration/recapitulatif">
+        <!-- Quand l'utilisateur clique sur un bouton name="_eventId_submit", on passe à l’action 'finaliser' -->
         <transition on="submit" to="finaliser"/>
         <transition on="back" to="coordonnees"/>
     </view-state>
 
     <!-- Étape 8 : Dépôt de la déclaration -->
     <action-state id="finaliser">
+        <!-- Appel du service pour sauvegarder/valider la déclaration -->
         <evaluate expression="declarationFraisService.soumettreDeclaration(flowScope.declaration)"/>
         <transition to="confirmation"/>
     </action-state>
