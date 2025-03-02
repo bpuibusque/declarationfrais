@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Récapitulatif des Déclarations - Administrateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #E94E77, #D68189);
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background: #ff5722;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 10px;
+        }
+        a:hover {
+            background: #e64a19;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: white;
+            color: black;
+        }
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background: #e64a19;
+            color: white;
+        }
+        .status {
+            font-weight: bold;
+        }
+        .status.EN_ATTENTE {
+            color: orange;
+        }
+        .status.VALIDE {
+            color: green;
+        }
+        .status.INVALIDE {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Récapitulatif des Déclarations en Cours</h1>
+    <div class="container">
+        <p>Consultez et gérez l'ensemble des déclarations soumises :</p>
+        <a href="/admin/declarations">Retour à l'Accueil Admin</a>
+        <a href="/logout">Se déconnecter</a>
+
+        <h2>Liste des Déclarations</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Utilisateur</th>
+                <th>Formation</th>
+                <th>Lieu</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+            <tr th:each="declaration : ${declarations}">
+                <td th:text="${declaration.date}"></td>
+                <td th:text="${declaration.user.username}"></td>
+                <td th:text="${declaration.formation}"></td>
+                <td th:text="${declaration.lieu}"></td>
+                <td th:text="${declaration.statut}" th:class="'status ' + ${declaration.statut}"></td>
+                <td>
+                    <a th:href="@{/admin/declaration/{id}(id=${declaration.id})}">Voir</a>
+                    <a th:if="${declaration.statut == 'EN_ATTENTE'}"
+                       th:href="@{/admin/declaration/valider/{id}(id=${declaration.id})}">
+                       Valider
+                    </a>
+                    <a th:if="${declaration.statut == 'EN_ATTENTE'}"
+                       th:href="@{/admin/declaration/invalider/{id}(id=${declaration.id})}">
+                       Invalider
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Détails de la Formation - Administrateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, #E94E77, #D68189);
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+            background: #ff5722;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 10px;
+        }
+        a:hover {
+            background: #e64a19;
+        }
+        .details {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+            margin-top: 20px;
+            width: 80%;
+            text-align: left;
+        }
+        h2 {
+            margin-top: 30px;
+            color: #fff;
+        }
+        p {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        strong {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Détails de la Formation</h1>
+    <div class="container">
+        <a href="/admin/declarations">Retour à la Liste des Déclarations</a>
+        <a href="/logout">Se déconnecter</a>
+
+        <div class="details">
+            <p><strong>Professeur :</strong>
+                <span th:text="${declaration.professeur}"></span>
+            </p>
+            <p><strong>Formation :</strong>
+                <span th:text="${declaration.formation}"></span>
+            </p>
+            <p><strong>Date :</strong>
+                <span th:text="${declaration.date}"></span>
+            </p>
+            <p><strong>Lieu :</strong>
+                <span th:text="${declaration.lieu}"></span>
+            </p>
+
+            <h2>Frais de Transport</h2>
+            <p>
+                <strong>Type :</strong>
+                <span th:text="${declaration.fraisTransport.typeTransport}"></span>
+            </p>
+            <p>
+                <strong>Montant :</strong>
+                <span th:text="${declaration.fraisTransport.montant}"></span> €
+            </p>
+
+            <h2>Frais d'Hébergement</h2>
+            <p>
+                <strong>Type :</strong>
+                <span th:text="${declaration.fraisHebergement.typeHebergement}"></span>
+            </p>
+            <p>
+                <strong>Montant :</strong>
+                <span th:text="${declaration.fraisHebergement.montant}"></span> €
+            </p>
+
+            <h2>Frais de Restauration</h2>
+            <p>
+                <strong>Type :</strong>
+                <span th:text="${declaration.fraisRestauration.typeRestauration}"></span>
+            </p>
+            <p>
+                <strong>Montant :</strong>
+                <span th:text="${declaration.fraisRestauration.montant}"></span> €
+            </p>
+
+            <h2>Coordonnées Bancaires</h2>
+            <p>
+                <strong>Titulaire du Compte :</strong>
+                <span th:text="${declaration.coordonneesBancaires.titulaireCompte}"></span>
+            </p>
+            <p>
+                <strong>IBAN :</strong>
+                <span th:text="${declaration.coordonneesBancaires.iban}"></span>
+            </p>
+            <p>
+                <strong>BIC :</strong>
+                <span th:text="${declaration.coordonneesBancaires.bic}"></span>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
